@@ -1,303 +1,157 @@
 // import store from '../store/index'
 
 const homeRouter = [
-    {
-        path: '',
-        redirect: 'index'
+  {
+    path: '',
+    redirect: 'index'
+  },
+  {
+    path: 'index',
+    meta: {
+      title: '首页',
     },
-    {
-        path: 'index',
-        meta: {
-            title: '总览',
-        },
-        component: () => import('../views/overviewChildren/index'),
+    component: () => import('../views/children/index'),
 
+  },{
+    path: 'demeanor',
+    meta: {
+      title: '会员风采',
     },
-    {
-        path: 'approval',
-        meta: {
-            title: '我审批的',
-        },
-        component: () => import('../views/overviewChildren/approval'),
+    component: () => import('../views/children/demeanor'),
 
+  },{
+    path: 'demeanorDetail',
+    meta: {
+      title: '会员风采详情',
     },
-    {
-        path: 'subApproval',
-        meta: {
-            title: '行政审批',
-        },
-        component: () => import('../views/overviewChildren/subApproval'),
+    component: () => import('../views/children/demeanorDetail'),
 
+  },{
+    path: 'demand',
+    meta: {
+      title: '技术需求',
     },
-    {
-        path: 'approvalDetail',
-        name: 'approval',
-        meta: {
-            title: '行政审批',
-        },
-        component: () => import('../views/overviewChildren/approvalDetail'),
+    component: () => import('../views/children/demand'),
 
+  },{
+    path: 'demandDetail',
+    meta: {
+      title: '技术需求详情',
     },
-    {
-        path: 'subMerchants',
-        meta: {
-            title: '招商资料',
-        },
-        component: () => import('../views/overviewChildren/subMerchants'),
+    component: () => import('../views/children/demandDetail'),
 
+  },{
+    path: 'meet',
+    meta: {
+      title: '会议活动',
     },
-    {
-        path: 'merchantsDetail',
-        name: 'merchants',
-        meta: {
-            title: '招商资料',
-        },
-        component: () => import('../views/overviewChildren/merchantsDetail'),
+    component: () => import('../views/children/meet'),
 
+  },{
+    path: 'meetDetail',
+    meta: {
+      title: '会议活动详情',
     },
-    {
-        path: 'subSponsor',
-        meta: {
-            title: '赞助协议',
-        },
-        component: () => import('../views/overviewChildren/subSponsor'),
+    component: () => import('../views/children/meetDetail'),
 
+  },{
+    path: 'expert',
+    meta: {
+      title: '专家展示',
     },
+    component: () => import('../views/children/expert'),
 
-    {
-        path: 'sponsorDetail',
-        name: 'sponsor',
-        meta: {
-            title: '赞助协议',
-        },
-        component: () => import('../views/overviewChildren/sponsorDetail'),
-
+  },{
+    path: 'expertDetail',
+    meta: {
+      title: '专家详情',
     },
-    {
-        path: 'payment',
-        meta: {
-            title: '到款',
-        },
-        component: () => import('../views/overviewChildren/payment'),
+    component: () => import('../views/children/expertDetail'),
 
+  },{
+    path: 'newest',
+    meta: {
+      title: '最新技术',
     },
-    {
-        path: 'paymentDetail',
-        name: 'payment',
-        meta: {
-            title: '到款',
-        },
-        component: () => import('../views/overviewChildren/paymentDetail'),
+    component: () => import('../views/children/newest'),
 
+  },{
+    path: 'newestDetail',
+    meta: {
+      title: '最新技术详情',
     },
-    {
-        path: 'invoice',
-        meta: {
-            title: '发票',
-        },
-        component: () => import('../views/overviewChildren/invoice'),
+    component: () => import('../views/children/newestDetail'),
 
+  },{
+    path: 'catalysis',
+    meta: {
+      title: '催化情报',
     },
-    {
-        path: 'invoiceDetail',
-        name: 'invoice',
-        meta: {
-            title: '发票',
-        },
-        component: () => import('../views/overviewChildren/invoiceDetail'),
+    component: () => import('../views/children/catalysis'),
 
+  },{
+    path: 'catalysisDetail',
+    meta: {
+      title: '催化情报详情',
     },
-    {
-        path: 'contract',
-        meta: {
-            title: '下游合同',
-        },
-        component: () => import('../views/overviewChildren/contract'),
+    component: () => import('../views/children/catalysisDetail'),
 
+  },{
+    path: 'user',
+    meta: {
+      title: '个人中心',
     },
-    {
-        path: 'contractDetail',
-        name: 'contract',
-        meta: {
-            title: '下游合同',
-        },
-        component: () => import('../views/overviewChildren/contractDetail'),
+    component: () => import('../views/children/user'),
 
+  },{
+    path: 'userApply',
+    meta: {
+      title: '已申请',
     },
-    {
-        path: 'pay',
-        meta: {
-            title: '付款',
-        },
-        component: () => import('../views/overviewChildren/pay'),
+    component: () => import('../views/children/userApply'),
 
+  },{
+    path: 'userPost',
+    meta: {
+      title: '已发布',
     },
-    {
-        path: 'payDetail',
-        name: 'pay',
-        meta: {
-            title: '付款',
-        },
-        component: () => import('../views/overviewChildren/payDetail'),
+    component: () => import('../views/children/userPost'),
 
+  },{
+    path: 'userServer',
+    meta: {
+      title: '已服务',
     },
-    {
-        path: 'otherPay',
-        meta: {
-            title: '特殊付款',
-        },
-        component: () => import('../views/overviewChildren/otherPay'),
+    component: () => import('../views/children/userServer'),
 
+  },{
+    path: 'userGongying',
+    meta: {
+      title: '供应商详情',
     },
-    {
-        path: 'otherPayDetail',
-        name:'otherPay',
-        meta: {
-            title: '特殊付款',
-        },
-        component: () => import('../views/overviewChildren/otherPayDetail'),
+    component: () => import('../views/children/userGongying'),
 
+  },{
+    path: 'addOrg',
+    meta: {
+      title: '加入企业',
     },
-    {
-        path: 'fpr',
-        meta: {
-            title: '特殊付款',
-        },
-        component: () => import('../views/overviewChildren/fpr'),
+    component: () => import('../views/children/addOrg'),
 
+  },{
+    path: 'addExpert',
+    meta: {
+      title: '加入专家库',
     },
-    {
-        path: 'fprDetail',
-        name:'fpr',
-        meta: {
-            title: '特殊付款',
-        },
-        component: () => import('../views/overviewChildren/fprDetail'),
+    component: () => import('../views/children/addExpert'),
 
+  },{
+    path: 'addNeed',
+    meta: {
+      title: '技术需求发布',
     },
-    {
-        path: 'send',
-        meta: {
-            title: '我发起的',
-        },
-        component: () => import('../views/overviewChildren/send'),
+    component: () => import('../views/children/addNeed'),
 
-    },
-    {
-        path: 'cc',
-        meta: {
-            title: '抄送我的',
-        },
-        component: () => import('../views/overviewChildren/cc'),
-
-    },
-    {
-        path: 'systemMsg',
-        meta: {
-            title: '系统消息',
-        },
-        component: () => import('../views/overviewChildren/system'),
-
-    },
-    {
-        path: 'dynamic',
-        meta: {
-            title: '动态',
-        },
-        component: () => import('../views/overviewChildren/dynamic'),
-
-    },
-    {
-        path: 'project',
-        meta: {
-            title: '项目管理',
-        },
-        component: () => import('../views/projectChildren/project'),
-
-    },
-    {
-        path: 'list',
-        meta: {
-            title: '项目列表',
-        },
-        component: () => import('../views/projectChildren/list'),
-
-    },
-    {
-        path: 'detail',
-        name: 'detail',
-        meta: {
-            title: '项目详情',
-        },
-        component: () => import('../views/projectChildren/detail'),
-
-    },
-    {
-        path: 'statistics',
-        name: 'statistics',
-        meta: {
-            title: '数据统计',
-        },
-        component: () => import('../views/projectChildren/statistics'),
-
-    },
-    {
-        path: 'add',
-        meta: {
-            title: '新建项目',
-        },
-        component: () => import('../views/projectChildren/add'),
-
-    },
-    {
-        path: 'register',
-        meta: {
-            title: '用章登记',
-        },
-        component: () => import('../views/projectChildren/register'),
-
-    },
-    {
-        path: 'xuehui',
-        meta: {
-            title: '学会管理',
-        },
-        component: () => import('../views/xuehuiChildren/xuehui'),
-
-    },
-    {
-        path: 'department',
-        meta: {
-            title: '部门管理',
-        },
-        component: () => import('../views/xuehuiChildren/department'),
-
-    },
-    {
-        path: 'personnel',
-        meta: {
-            title: '人员管理',
-        },
-        component: () => import('../views/xuehuiChildren/personnel'),
-
-    },
-    {
-        path: 'system',
-        meta: {
-            title: '系统管理',
-        },
-        component: () => import('../views/systemChildren/system'),
-
-    },
-    {
-        path: 'passSet',
-        meta: {
-            title: '密码修改',
-        },
-        component: () => import('../views/systemChildren/passSet'),
-
-    }
-
-
+  }
 ]
 export default homeRouter

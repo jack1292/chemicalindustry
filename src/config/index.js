@@ -1,5 +1,5 @@
 
-let urlStr = 'http://192.168.2.251:8094' //
+let urlStr = 'http://demo.tmlsystem.com:9095/orgmem' //
 // let urlStr = 'http://api.emof.cn/' //
 let localAnStore = [
   {
