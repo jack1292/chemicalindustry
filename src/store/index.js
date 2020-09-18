@@ -5,13 +5,9 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    Sha:'',
+    user:'',
   },
   mutations: {
-    keepSha(state,obj){
-      console.log()
-      state.Sha = obj.sha
-    },
   },
   actions: {
   },

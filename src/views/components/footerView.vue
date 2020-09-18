@@ -8,7 +8,7 @@
     </div>
     <div class="footer-right">
       <img src="../../assets/img/ewm.png" alt="">
-      <p>化工小助手</p>
+      <p>化工技术服务小助手</p>
     </div>
   </div>
 </div>
@@ -38,6 +38,7 @@ name: "footerView"
       display: block;
       width: 102px;
       height: 102px;
+      margin:  0 auto;
     }
     p{
       text-align: center;

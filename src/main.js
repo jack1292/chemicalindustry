@@ -12,6 +12,7 @@ import  plugin from './plugin/index'
 
 Vue.use(Element)
 Vue.use(plugin)
+Vue.prototype.baseApi = "http://demo.tmlsystem.com:9095/orgmem/";
 Vue.config.productionTip = false
 
 new Vue({

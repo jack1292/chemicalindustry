@@ -1,7 +1,7 @@
 <template>
   <div class="demand bx-content">
     <div class="page-title">
-      <i class="iconfont iconleft"></i>当前位置：首页 > 已服务 > {{ title }}
+      <i class="iconfont iconleft"></i>当前位置：首页 > 技术需求 > {{ title }}
     </div>
     <div class="demand-detail">
       <div class="demand-detail-title">
@@ -29,6 +29,8 @@
         <div class="info-item">
           <span class="label">需求分类：</span>{{ need_type | need_type }}
         </div>
+
+
         <div class="info-item" v-if="org_name">
           <span class="label">需求单位：</span>{{ org_name }}
         </div>
@@ -45,19 +47,25 @@
         <div class="info-item" v-if="org_info">
           <span class="label">单位简介：</span>{{ org_info }}
         </div>
+
+
+        <el-button class="ican" v-if="isLogin && !registered" @click="solve">我能解决
+        </el-button>
+        <el-button class="ican" v-if="!isLogin && !registered" @click="solve">我能解决</el-button>
       </div>
     </div>
   </div>
-</template>`
+</template>
 
 <script>
 import {needType} from "@/tools/utils";
 
 export default {
-  name: "userServer",
+  name: "techneed_detail",
   data() {
     return {
-      morenzhuanjia: 'this.src="' + require('../../assets/img/zhuanjia.png') + '"',
+      isLogin: false,
+      expert_authentication: false,
       creation_time: '',
       description: '',
       other_requirements: '',
@@ -76,20 +84,67 @@ export default {
     }
   },
   created() {
-    if (!this.$store.state.user) {
-      this.$router.push('/login')
-      return
+    console.log(location)
+    this.$emit('setIndex', 2)
+    this.isLogin = this.$store.state.user ? true : false
+    if (this.isLogin) {
+      this.expert_authentication = this.$store.state.user.expert_authentication
+      console.log(this.expert_authentication)
     }
-    this.$emit('setIndex', -1)
     this.getDetail()
   },
   methods: {
-    //  获取详情
+    myformatter() {
+      let date = new Date();
+      var strDate = date.getFullYear() + "-";
+
+      strDate += date.getMonth() + 1 + "-";
+
+      strDate += date.getDate();
+
+      return strDate;
+    },
+    solve() {
+      let time = this.myformatter();
+      try {
+        const user = this.$store.state.user
+        if (!user) {
+          this.$message.error('请先登陆')
+          this.$router.push({
+            path:'/login',
+            query:{
+              redirect:location.pathname + location.search
+            }
+          })
+          return
+        }
+        if (user && !this.expert_authentication) {
+          return this.$message.error('请先在个人中心完成专家认证')
+        }
+        this.$api.apiContent.jqDemand({
+          is_served: 1,
+          sha1: this.$store.state.user.sha1,
+          need_sha1: this.url,
+          creation_time: time,
+          supplier_sha1: this.baseApi + "userinfos/" + this.$store.state.user.sha1 + "/"
+        }).then(res => {
+          if (res && res.sha1) {
+            this.$router.push('/home/user')
+          } else {
+            this.$message.error(res.data.detail || '提交失败')
+          }
+        })
+
+
+      } catch (error) {
+
+        this.$message.error('提交失败')
+      }
+    },
     getDetail() {
       this.$api.apiContent.demandDetail({
         id: this.$route.query.id,
       }).then(res => {
-        console.log(res)
         this.creation_time = this.$tools.ZHDate(new Date(res.creation_time))
         this.description = res.description
         this.other_requirements = res.other_requirements
@@ -118,15 +173,17 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.demand{
-  .demand-detail{
+.demand {
+  .demand-detail {
     border: solid 1px #aaccef;
     padding: 25px;
     margin-bottom: 25px;
-    .demand-detail-title{
+
+    .demand-detail-title {
       padding: 20px 0;
       border-bottom: 1px solid #ccc;
-      h3{
+
+      h3 {
         font-size: 22px;
         font-weight: bold;
         line-height: 44px;
@@ -134,24 +191,30 @@ export default {
         text-align: center;
         margin-bottom: 15px;
       }
-      p{
+
+      p {
         text-align: center;
-        span{
+
+        span {
           padding: 0 30px;
         }
       }
     }
-    .detail-info{
+
+    .detail-info {
       margin-top: 30px;
-      .info-item{
-        margin-bottom: 10px;
-        .label{
+
+      .info-item {
+        margin-bottom: 20px;
+
+        .label {
           font-size: 16px;
-          font-weight: 500;
+          font-weight: bold;
         }
       }
     }
-    .ican{
+
+    .ican {
       display: block;
       width: 138px;
       height: 40px;

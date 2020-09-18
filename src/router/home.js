@@ -13,46 +13,46 @@ const homeRouter = [
     component: () => import('../views/children/index'),
 
   },{
-    path: 'demeanor',
+    path: 'exhibit_expert',
     meta: {
       title: '会员风采',
     },
-    component: () => import('../views/children/demeanor'),
+    component: () => import('../views/children/exhibit_expert'),
 
   },{
-    path: 'demeanorDetail',
+    path: 'exhibit_expert_detail',
     meta: {
       title: '会员风采详情',
     },
-    component: () => import('../views/children/demeanorDetail'),
+    component: () => import('../views/children/exhibit_expert_detail'),
 
   },{
-    path: 'demand',
+    path: 'techneed',
     meta: {
       title: '技术需求',
     },
-    component: () => import('../views/children/demand'),
+    component: () => import('../views/children/techneed'),
 
   },{
-    path: 'demandDetail',
+    path: 'techneed_detail',
     meta: {
       title: '技术需求详情',
     },
-    component: () => import('../views/children/demandDetail'),
+    component: () => import('../views/children/techneed_detail'),
 
   },{
-    path: 'meet',
+    path: 'activity',
     meta: {
       title: '会议活动',
     },
-    component: () => import('../views/children/meet'),
+    component: () => import('../views/children/activity'),
 
   },{
-    path: 'meetDetail',
+    path: 'activity_detail',
     meta: {
       title: '会议活动详情',
     },
-    component: () => import('../views/children/meetDetail'),
+    component: () => import('../views/children/activity_detail'),
 
   },{
     path: 'expert',
@@ -69,18 +69,18 @@ const homeRouter = [
     component: () => import('../views/children/expertDetail'),
 
   },{
-    path: 'newest',
+    path: 'exhibit_technology',
     meta: {
       title: '最新技术',
     },
-    component: () => import('../views/children/newest'),
+    component: () => import('../views/children/exhibit_technology'),
 
   },{
-    path: 'newestDetail',
+    path: 'exhibit_technology_detail',
     meta: {
       title: '最新技术详情',
     },
-    component: () => import('../views/children/newestDetail'),
+    component: () => import('../views/children/exhibit_technology_detail'),
 
   },{
     path: 'catalysis',
@@ -88,13 +88,6 @@ const homeRouter = [
       title: '催化情报',
     },
     component: () => import('../views/children/catalysis'),
-
-  },{
-    path: 'catalysisDetail',
-    meta: {
-      title: '催化情报详情',
-    },
-    component: () => import('../views/children/catalysisDetail'),
 
   },{
     path: 'user',
@@ -129,7 +122,7 @@ const homeRouter = [
     meta: {
       title: '供应商详情',
     },
-    component: () => import('../views/children/userGongying'),
+    component: () => import('../views/children/supplier'),
 
   },{
     path: 'addOrg',

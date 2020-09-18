@@ -1,48 +1,39 @@
 <template>
   <div class="expert bx-content">
     <div class="page-title">
-      <i class="iconfont iconleft"></i>当前位置：首页 > 专家展示 > 陈建峰
+      <i class="iconfont iconleft"></i>当前位置：首页 > 专家展示 > {{ exhibit_obj }}
     </div>
     <div class="expert-detail flex align-start">
-      <img src="../../assets/img/zj.png" alt="" class="zj-logo">
+      <img :src="obj_pic_path" alt="" :onerror="morenzhuanjia" class="zj-logo">
       <div class="zj-info">
         <div class="zj-name">
-          <h3 >陈建峰</h3>
-          <p><span>出生年月：1965年8月</span><span>民族：汉族</span></p>
-          <p><span>工作单位：中国工程院</span><span>籍贯：浙江省慈溪市</span></p>
-          <p></p>
+          <h3 >{{ exhibit_obj }}</h3>
+          <p><span>出生年月：{{ title.出生年月 }}</span><span>民族：{{ title.民族 }}</span></p>
+          <p><span>工作单位：{{ title.工作单位 }}</span><span>籍贯：{{ title.籍贯 }}</span></p>
         </div>
         <div class="zj-desc">
-          <p class="zj-desc-tit">
+          <p class="zj-desc-tit" >
             <span>专家职称</span>
           </p>
-          <div class="zj-desc-info">中国工程院党组成员、秘书长</div>
+          <div class="zj-desc-info">{{ exhibit_detail.专家职称 }} </div>
         </div>
         <div class="zj-desc">
-          <p class="zj-desc-tit">
+          <p class="zj-desc-tit" v-if="exhibit_detail.研究方向">
             <span>研究方向</span>
           </p>
-          <div class="zj-desc-info">
-            现任北京化工大学化工学院院长，纳米材料先进制备技术与应用科学教育部重点实验室主任，教育部超重力工程研究中心主任，校学术委员会委员，国家
-            工业领域“节能减排”总体专家组成员，中国化工学会常务理事兼化学工程专业委员会副主任，中国颗粒学会理事超微颗粒专业委员会副主任，中国材料
-            学会青年委员会常务理事，《The Canadian Journal of Chemical Engineering》副主编、《Chemical Engineering and Processing: Process Intensi
-            fication》、《Particuology》、《化工学报》、《高校化学工程学报》、《功能材料》等刊物编委。
-          </div>
+          <div class="zj-desc-info">{{ exhibit_detail.研究方向 }} </div>
         </div>
-        <div class="zj-desc">
+        <div class="zj-desc" v-if="exhibit_detail.主要成果">
           <p class="zj-desc-tit">
             <span>主要成果</span>
           </p>
-          <div class="zj-desc-info">主持承担过国家自然科学基金委重大项目、创新研究群体项目、国家“863”重点项目、国家科技攻关计划重点项目、国家高技术产业化示范工程项目等系
-          列国家重大、重点项目和国际公司合作项目。</div>
+          <div class="zj-desc-info">{{ exhibit_detail.主要成果}}</div>
         </div>
-        <div class="zj-desc">
+        <div class="zj-desc" v-if="awards">
           <p class="zj-desc-tit">
             <span>获奖信息</span>
           </p>
-          <div class="zj-desc-info">获何梁何利创新奖（2008），并作为第一完成人，获国家技术发明奖二等奖（2002）、国家科学技术进步奖二等奖（2007）共2次，省部级一等奖5次、二
-          等奖2次，获北京市教学成果奖一等奖共2次，并获国家石油与化学工业优秀科技图书奖一等奖，美国DOW化学研究员基金奖，第八届中国青年科技奖，第八
-          届中国高校霍英东青年教师奖，国家“863”计划十五周年突出贡献先进工作者，全国优秀教师和北京市创新标兵称号等荣誉。</div>
+          <div class="zj-desc-info">{{awards}}</div>
         </div>
       </div>
     </div>
@@ -53,10 +44,45 @@
 export default {
 name: "expertDetail",
   data() {
-    return {}
+    return {
+      awards: '',
+      creation_time: '',
+      exhibit_info: '',
+      exhibit_detail:'',
+      exhibit_obj: '',
+      exhibit_type: '',
+      obj_pic_path: '',
+      sub_exhibit_type: '',
+      title: '',
+      url: '',
+      morenzhuanjia:'this.src="' + require('../../assets/img/zhuanjia.png') + '"',
+    }
   },
   created() {
     this.$emit('setIndex', 4)
+    this.getDetail()
+  },
+  methods:{
+    getDetail(){
+      this.$api.apiContent.expertDetail({
+        id: this.$route.query.id,
+      }).then(res => {
+        this.awards = res.awards
+        this.creation_time = res.creation_time
+        this.exhibit_info = res.exhibit_info
+        this.exhibit_obj = res.exhibit_obj
+        this.exhibit_type = res.exhibit_type
+        this.obj_pic_path = res.obj_pic_path
+        this.sub_exhibit_type = res.sub_exhibit_type
+        this.title = res.title
+        this.url = res.url
+
+        let str = res.exhibit_detail.replace(/'/g, '"')
+        let str2 = res.title.replace(/'/g, '"')
+          this.exhibit_detail = JSON.parse(str)
+          this.title = JSON.parse(str2)
+      })
+    }
   }
 }
 </script>
@@ -65,50 +91,56 @@ name: "expertDetail",
 .expert{
   .expert-detail{
     border: solid 1px #aaccef;
-    padding: 25px;
+    padding: 40px 0 0 50px;
     margin-bottom: 25px;
     .zj-logo{
       display: block;
       width: 122px;
       height: 122px;
       border-radius: 122px;
-      margin-right: 30px;
+      margin-right: 35px;
     }
     .zj-info{
       flex: 1;
       .zj-name{
+        padding-bottom: 20px;
+        margin-bottom: 36px;
+        border-bottom: 1px solid #e8e8e8;
         h3{
           font-size: 18px;
-          margin-bottom: 20px;
+          margin-bottom: 15px;
         }
         p{
           display: flex;
+          line-height: 30px;
           align-items: center;
-          height: 40px;
+          margin-bottom: 10px;
           span{
             display: block;
             width: 50%;
           }
         }
+
       }
       .zj-desc{
         margin-bottom: 30px;
         .zj-desc-tit{
           height: 40px;
           line-height: 40px;
-          border-bottom: 1px solid #ccc;
+          border-bottom: 1px solid #e8e8e8;
           margin-bottom: 10px;
           span{
             display: block;
-            width: 80px;
+            width: 73px;
             font-size: 18px;
-            color: #2882db;
-            line-height: 40px;
+            font-weight: bold;
+            line-height: 39px;
             border-bottom: 1px solid #2882db;
           }
         }
         .zj-desc-info{
           line-height: 150%;
+          margin-right: 30px;
         }
       }
     }

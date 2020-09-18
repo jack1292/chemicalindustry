@@ -194,7 +194,12 @@ input {
     -webkit-line-clamp: 3;
     overflow: hidden;
 }
-
+.ovHide4 {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
+    overflow: hidden;
+}
 .ovHide5 {
     display: -webkit-box;
     -webkit-box-orient: vertical;
@@ -645,4 +650,23 @@ input {
     font-size: 12px;
     color: #2882db;
     margin-right: 5px;
+}
+.no-data{
+    padding: 50px;
+    text-align: center;
+    font-size: 16px;
+}
+
+.table input{
+    height: 20px;
+    border: solid 1px #aaccef;
+}
+.table .el-input__icon{
+    line-height: 20px;
+}
+.table textarea{
+    height: 148px;
+    width: 982px;
+    border: solid 1px #aaccef;
+    resize: none;
 }

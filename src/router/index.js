@@ -7,6 +7,7 @@ Vue.use(VueRouter)
 
 const routers = new VueRouter({
   mode: 'history',
+  base: process.env.BASE_URL,
   routes: [
     {
       path: '/',
@@ -27,7 +28,12 @@ const routers = new VueRouter({
         needLogin: false // 是否需要登录才能访问
       }
     }
-  ]
+  ],
+  // 指定该钩子函数，返回坐标值即可
+  scrollBehavior (to, from, savedPosition) {
+    console.log(to, from, savedPosition)
+    return { x: 0, y: 0 }
+  }
 })
 
 let _cookie = {

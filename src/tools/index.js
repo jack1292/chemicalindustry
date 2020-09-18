@@ -39,9 +39,11 @@ function checkTel(tel) {   //验证手机号
 
 
 
+
 const tools = {
     ZHDate,
-    checkTel
+    checkTel,
+
 }
 
 Vue.prototype.$md5 = md5;
